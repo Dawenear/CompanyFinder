@@ -22,6 +22,7 @@ class Ares
      */
     public function getCompanyByICO($ico)
     {
+        $ico = rawurlencode($ico);
         $data = $this->getDataFromCurl($ico);
 
         $companyInfo = new AresResponse();
@@ -66,6 +67,8 @@ class Ares
      */
     public function getCompanyByName($name)
     {
+        $name = rawurlencode($name);
+        var_dump($name);
         $data = $this->getDataFromCurl($name, self::HTTP_COMPANY_BY_NAME);
 
         if ($data) $xml = simplexml_load_string($data);
@@ -98,6 +101,7 @@ class Ares
 
     private function getDataFromCurl($arg, $url = self::HTTP_COMPANY_BY_ICO)
     {
+        $arg = rawurlencode($arg);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url.$arg);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
