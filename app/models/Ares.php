@@ -49,8 +49,7 @@ class Ares
                 }
                 $companyInfo->setStreet($street);
 
-
-                $this->database->saveEntryToDB($data);
+                $this->database->saveEntryToDB($companyInfo);
                 return $companyInfo;
             } else {
                 return 'IČO firmy nebylo v databázi ARES nalezeno';
