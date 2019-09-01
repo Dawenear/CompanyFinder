@@ -68,7 +68,6 @@ class Ares
     public function getCompanyByName($name)
     {
         $name = rawurlencode($name);
-        var_dump($name);
         $data = $this->getDataFromCurl($name, self::HTTP_COMPANY_BY_NAME);
 
         if ($data) $xml = simplexml_load_string($data);
