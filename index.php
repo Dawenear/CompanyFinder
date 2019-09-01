@@ -10,7 +10,7 @@ $error = '';
 
 if (isset($_POST['searchCompany'])) {
     if ($_POST['ico'] !== '' && !is_int((int)$_POST['ico']) && ((int)$_POST['ico'] == $_POST['ico'])) {
-        $error = 'IČO musí být číslo' . $_POST['ico'];
+        $error = 'IČO musí být číslo';
     } elseif ($_POST['ico'] == '' && $_POST['companyName'] == '') {
         $error = 'Musí být zadáno ičo nebo jméno firmy';
     } else {
