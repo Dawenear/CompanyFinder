@@ -1,0 +1,15 @@
+.buttonLink {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
+}
