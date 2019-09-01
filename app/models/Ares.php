@@ -8,6 +8,18 @@ class Ares
     const HTTP_COMPANY_BY_NAME = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/ares_es.cgi?obch_jm=';
     const HTTP_COMPANY_BY_ICO = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=';
 
+    private $database;
+
+    public function __construct()
+    {
+        $this->database = new Database();
+    }
+
+    /**
+     * @param $ico
+     * @return AresResponse|string
+     * @throws \Exception
+     */
     public function getCompanyByICO($ico)
     {
         $data = $this->getDataFromCurl($ico);
@@ -36,6 +48,9 @@ class Ares
                     if (!empty($el->AA->CO)) $street .= strval($el->AA->CO);
                 }
                 $companyInfo->setStreet($street);
+
+
+                $this->database->saveEntryToDB($data);
                 return $companyInfo;
             } else {
                 return 'IČO firmy nebylo v databázi ARES nalezeno';
@@ -45,6 +60,11 @@ class Ares
         }
     }
 
+    /**
+     * @param $name
+     * @return AresResponse[]|int|string
+     * @throws \Exception
+     */
     public function getCompanyByName($name)
     {
         $data = $this->getDataFromCurl($name, self::HTTP_COMPANY_BY_NAME);
@@ -58,7 +78,7 @@ class Ares
             $el = $ela->children($ns['dtt']);
 
             if (count($el) === 1) {
-                return $this->getCompanyByICO($el->S->ico);
+                return (int)$el->S->ico;
             } else {
                 if (isset($el->R)) {
                     return 'Firma nenalezena';

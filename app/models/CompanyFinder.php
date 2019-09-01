@@ -27,7 +27,7 @@ class CompanyFinder
         if ($form['ico'] !== '') {
             $response = $this->searchByICO($form['ico']);
         } else {
-            $response = $this->ares->getCompanyByName($form['companyName']);
+            $response = $this->searchCompanyByName($form['companyName']);
         }
 
         $this->handleResponse($response);
@@ -56,7 +56,7 @@ class CompanyFinder
 
     /**
      * @param $ico
-     * @return \App\Models\AresResponse|bool|string
+     * @return \App\Models\AresResponse|string
      * @throws \Exception
      */
     private function searchByICO($ico)
@@ -66,7 +66,6 @@ class CompanyFinder
         }
 
         $data = $this->ares->getCompanyByICO($ico);
-        $this->database->saveEntryToDB($data);
         return $data;
     }
 
@@ -153,5 +152,19 @@ HTML;
         }
         $html .= '</tbody></table>';
         $this->htmlContent = $html;
+    }
+
+    /**
+     * @param $companyName
+     * @return AresResponse|AresResponse[]|int|string
+     * @throws \Exception
+     */
+    private function searchCompanyByName($companyName)
+    {
+        $response = $this->ares->getCompanyByName($companyName);
+        if (is_int($response)) {
+            return $this->searchByICO($response);
+        }
+        return $response;
     }
 }
