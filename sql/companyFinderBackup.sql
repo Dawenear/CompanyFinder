@@ -17,7 +17,7 @@ CREATE TABLE `company` (
   `city` varchar(256) NOT NULL,
   `street` varchar(256) NOT NULL,
   `psc` int(11) NOT NULL,
-  `last_updated` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `last_updated` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ico` (`ico`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
