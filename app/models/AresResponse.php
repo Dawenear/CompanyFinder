@@ -125,11 +125,11 @@ class AresResponse
      */
     public function setValues($ico, $dic, $psc, $name, $city, $street)
     {
-        $this->ico = (int)$ico;
-        $this->dic = $dic;
-        $this->psc = $psc;
-        $this->name = $name;
-        $this->city = $city;
-        $this->street = $street;
+        $this->setIco($ico);
+        $this->setDic($dic);
+        $this->setPsc($psc);
+        $this->setName($name);
+        $this->setCity($city);
+        $this->setStreet($street);
     }
 }

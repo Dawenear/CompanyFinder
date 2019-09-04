@@ -62,7 +62,7 @@ SQL;
         }
         $sql = <<<SQL
 UPDATE company SET (`dic` = '{$data->getDic()}', `name` = '{$data->getName()}', `city` = '{$data->getCity()}',
-`street` = '{$data->getStreet()}', `psc` = '{$data->getPsc()}', `last_updated` = '{$date->format('Y-m-d H:i:s')}');
+`street` = '{$data->getStreet()}', `psc` = '{$data->getPsc()}', `last_updated` = '{$date->format('Y-m-d H:i:s')}' WHERE `ico` = '{$data->getIco()}';);
 SQL;
         $this->database->query($sql);
         return true;
